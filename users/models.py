@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, name, typeAccount, specialRole, password):
+    def create_user(self, email, name, typeAccount, password, specialRole=None):
         user = self.model(email=email, name=name, typeAccount=typeAccount, specialRole=specialRole)
         user.set_password(password)
         user.is_staff = False
