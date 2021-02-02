@@ -11,6 +11,9 @@ django-environ = "*"
 dj-rest-auth = "*"
 django-allauth = "*"
 django-cors-headers = "*"
+pyyaml = "*"
+uritemplate = "*"
+drf-yasg = "*"
 
 [dev-packages]
 
