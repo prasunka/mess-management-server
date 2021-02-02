@@ -4,20 +4,21 @@ from django.db import models
 # Create your models here.
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, name, typeAccount, password, specialRole=None):
+    def create_user(self, email, name, typeAccount, password, is_staff=False, is_superuser=False, is_active=True, specialRole=None):
         user = self.model(email=email, name=name, typeAccount=typeAccount, specialRole=specialRole)
         user.set_password(password)
-        user.is_staff = False
-        user.is_superuser = False
+        user.is_staff = is_staff
+        user.is_superuser = is_superuser
+        user.is_active = True
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, typeAccount, password, specialRole=None,):
+    def create_superuser(self, email, name, typeAccount, password, is_staff=True, is_superuser=True, is_active=True, specialRole=None,):
         user = self.model(email=email, name=name, typeAccount=typeAccount, specialRole=specialRole)
         user.set_password(password)
-        user.is_staff = True
-        user.is_superuser = True
-        user.is_active = True
+        user.is_staff = is_staff
+        user.is_superuser = is_superuser
+        user.is_active = is_active
         user.save(using=self._db)
         return user
 
@@ -31,6 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     typeAccount = models.CharField(max_length=20)
     specialRole = models.CharField(max_length=100, null=True)
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
 
     REQUIRED_FIELDS = ['name', 'typeAccount']
     USERNAME_FIELD = 'email'
