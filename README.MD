@@ -4,7 +4,9 @@ An API server for the Mess Management System built with Django web framework.
 
 The API endpoints can currently be accessed at http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/v1/
 
-The available endpoints and API documentation can be accessed at http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/swagger/
+**The available endpoints and API documentation can be accessed at**:
+
+http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/swagger/
 
 or 
 
