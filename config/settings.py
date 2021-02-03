@@ -88,6 +88,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
+    'LOGIN_SERIALIZER': 'users.serializers.CustomLoginSerializer',
 }
 
 MIDDLEWARE = [
