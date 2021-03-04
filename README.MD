@@ -39,8 +39,8 @@ $ sudo -u postgres createuser --interactive
 Enter your username which is same as of your OS and press 'y' to make it superuser.
 
 $ createdb <username>
-$ psql (verify if you can login to postgres without a password)
-
+$ psql #verify if you can login to postgres without a password
+$ \q #exit from psql
 $ createdb mess_management
 ```
 ## Setup environment variables

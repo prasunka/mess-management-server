@@ -1,0 +1,1 @@
+1. Introduce a meal type on coupon for flexible rates of different types of meal.
