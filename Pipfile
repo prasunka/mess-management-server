@@ -14,6 +14,7 @@ django-cors-headers = "*"
 pyyaml = "*"
 uritemplate = "*"
 drf-yasg = "*"
+razorpay = "*"
 
 [dev-packages]
 
