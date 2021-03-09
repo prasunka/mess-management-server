@@ -5,6 +5,8 @@ from rest_framework.decorators import api_view
 import razorpay
 import os, environ, json
 
+from invoices.models import Invoice
+from payments.models import Payment
 from .models import Coupon
 from .serializers import CouponSerializer
 
@@ -71,6 +73,16 @@ def verifyPayment(request):
     except razorpay.errors.SignatureVerificationError:
         result = 0
 
+    if(result == 1):
+        order = client.order.fetch(params['razorpay_order_id'])
+        invoice = Invoice(type='coupon', order_id=order['id'])
+        invoice.save()
+
+        payment = Payment(buyer=request.user, invoice=invoice, amount=order['amount']/100)
+        payment.save()
+
+        coupon = Coupon(buyer=request.user, invoice=invoice)
+        coupon.save()
 
     return Response({'success' : result})
 

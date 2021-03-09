@@ -30,7 +30,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("", schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),
+    path("", schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')), # for browsable API login
     path('api/v1/auth/', include('dj_rest_auth.urls')),
