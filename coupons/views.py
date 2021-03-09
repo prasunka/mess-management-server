@@ -3,7 +3,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import razorpay
-import os, environ
+import os, environ, json
 
 from .models import Coupon
 from .serializers import CouponSerializer
@@ -41,12 +41,14 @@ def buyCoupon(request):
 
 @api_view(['POST'])
 def verifyPayment(request):
-    print(request.POST)
+    
+    request_body = json.loads(request.body.decode('utf-8'))
+    print(request_body)
 
     params = {}
     try:
-        params['razorpay_payment_id'] = request.POST['payment_id']
-        params['razorpay_signature'] = request.POST['signature']
+        params['razorpay_payment_id'] = request_body['payment_id']
+        params['razorpay_signature'] = request_body['signature']
     except KeyError:
         return Response({'message':'Provide both payment_id and signature'})
     
