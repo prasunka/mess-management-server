@@ -53,7 +53,7 @@ def verifyPayment(request):
         return Response({'message':'Provide both payment_id and signature'})
     
     try:
-        params['razorpay_order_id'] = 'order_GjqjlMhZWry5QR'# orders[request.user.email]
+        params['razorpay_order_id'] = orders[request.user.email]['id']
     except KeyError:
         return Response({'message':'No order found for this user'})
     
