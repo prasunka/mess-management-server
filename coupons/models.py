@@ -4,6 +4,7 @@ from django.conf import settings
 
 from invoices.models import Invoice
 
+
 # Create your models here.
 class Coupon(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -15,4 +16,3 @@ class Coupon(models.Model):
 
     def __str__(self):
         return str(self.uuid)
-

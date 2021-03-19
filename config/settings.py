@@ -20,10 +20,8 @@ env = environ.Env(
 # reading .env file
 environ.Env.read_env()
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -36,7 +34,6 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['192.168.43.10', '127.0.0.1', 'localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # Needed by django-allauth
+    'django.contrib.sites',  # Needed by django-allauth
 
     # External apps 
     'rest_framework',
@@ -61,19 +58,18 @@ INSTALLED_APPS = [
     'invoices',
     'payments',
 
-
     # local apps
-    'users.apps.UsersConfig', 
+    'users.apps.UsersConfig',
 ]
 
-AUTH_USER_MODEL = 'users.User' # Custom user model
+AUTH_USER_MODEL = 'users.User'  # Custom user model
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        #'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
@@ -96,9 +92,9 @@ REST_AUTH_SERIALIZERS = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # CORS
+    'corsheaders.middleware.CorsMiddleware',  # CORS
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -126,7 +122,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -136,7 +131,6 @@ DATABASES = {
         'NAME': 'mess_management'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -156,7 +150,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -170,14 +163,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),] # For local
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # For production
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]  # For local
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-SITE_ID = 1 # Needed by django-allauth
+SITE_ID = 1  # Needed by django-allauth
