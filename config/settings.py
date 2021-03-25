@@ -54,12 +54,15 @@ INSTALLED_APPS = [
     'allauth.account',
     'corsheaders',
     'drf_yasg',
-    'coupons',
-    'invoices',
-    'payments',
 
     # local apps
     'users.apps.UsersConfig',
+    'coupons',
+    'invoices',
+    'payments',
+    'bills',
+    'complaints',
+
 ]
 
 AUTH_USER_MODEL = 'users.User'  # Custom user model
@@ -173,3 +176,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1  # Needed by django-allauth
+
+MEDIA_URL =  '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

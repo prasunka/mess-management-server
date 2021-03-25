@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -38,6 +39,16 @@ urlpatterns = [
     # path('api/v1/account/', include('allauth.urls')), # No need right now. dj-rest-auth provides the current
     # requirements.
     path('api/v1/coupon/', include('coupons.urls')),
+    path('api/v1/bill/', include('bills.urls')),
+    path('api/v1/complaint/', include('complaints.urls')),
     path('api/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),
     path('api/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),
 ]
+
+if settings.DEBUG:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    from django.conf.urls.static import static
+
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
