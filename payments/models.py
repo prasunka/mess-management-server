@@ -3,6 +3,7 @@ from django.conf import settings
 
 from invoices.models import Invoice
 
+
 # Create your models here.
 class Payment(models.Model):
     buyer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
