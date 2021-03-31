@@ -15,7 +15,7 @@ class BillsList(generics.ListAPIView):
     serializer_class = BillSerializer
 
     def get_queryset(self):
-        return Bill.objects.filter(buyer=self.request.user)
+        return Bill.objects.filter(buyer=self.request.user.id)
 
 
 orders = {}

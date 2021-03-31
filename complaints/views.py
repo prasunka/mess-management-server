@@ -16,10 +16,10 @@ class ComplaintList(generics.ListCreateAPIView):
             return ComplaintCreateSerializer
 
     def get_queryset(self):
-        return Complaint.objects.filter(user=self.request.user)
+        return Complaint.objects.filter(user=self.request.user.id)
 
 class ComplaintUpdate(generics.UpdateAPIView):
     serializer_class = ComplaintUpdateSerializer
 
     def get_queryset(self):
-        return Complaint.objects.filter(user=self.request.user)
+        return Complaint.objects.filter(user=self.request.user.id)

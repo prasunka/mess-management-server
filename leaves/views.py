@@ -16,10 +16,10 @@ class LeaveList(generics.ListCreateAPIView):
             return LeaveCreateSerializer
 
     def get_queryset(self):
-        return Leave.objects.filter(user=self.request.user)
+        return Leave.objects.filter(user=self.request.user.id)
 
 class LeaveUpdate(generics.UpdateAPIView):
     serializer_class = LeaveUpdateSerializer
 
     def get_queryset(self):
-        return Leave.objects.filter(user=self.request.user)
+        return Leave.objects.filter(user=self.request.user.id)

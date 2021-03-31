@@ -17,7 +17,7 @@ class CouponList(generics.ListAPIView):
     serializer_class = CouponSerializer
 
     def get_queryset(self):
-        return Coupon.objects.filter(buyer=self.request.user)
+        return Coupon.objects.filter(buyer=self.request.user.id)
 
 
 orders = {}
