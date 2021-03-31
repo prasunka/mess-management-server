@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'payments',
     'bills',
     'complaints',
+    'leaves',
 
 ]
 
