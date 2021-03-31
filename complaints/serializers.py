@@ -17,4 +17,4 @@ class ComplaintCreateSerializer(ComplaintListSerializer):
 class ComplaintUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Complaint
-        fields = ('id', 'resolved')
+        fields = ('resolved',)
