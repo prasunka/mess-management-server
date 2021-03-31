@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from rest_framework import generics
 import environ
 import json
 import razorpay
@@ -32,22 +30,27 @@ def payBill(request):
         environ.Env.read_env()
         RAZORPAY_ID = env('RAZORPAY_ID')
         RAZORPAY_SECRET_KEY = env('RAZORPAY_SECRET_KEY')
-        client = razorpay.Client(auth=(RAZORPAY_ID, RAZORPAY_SECRET_KEY))
 
-        
-        body_data = json.loads(request.body.decode('utf-8'))
-        bill_id  = body_data['id']
-        bill = Bill.objects.get(id = bill_id)
-        # try:    
-        # except (KeyError, json.JSONDecodeError):
-        #     return Response({'message': 'Error: Invalid Id'})
+        client = razorpay.Client(auth=(RAZORPAY_ID, RAZORPAY_SECRET_KEY))
+        try:
+            request_body = json.loads(request.body.decode('utf-8'))
+            bill_id = request_body['id']
+        except (KeyError, json.JSONDecodeError):
+            return Response({'message': 'Please supply bill id'})
+
+        try:
+            bill = Bill.objects.get(id=bill_id)
+        except:
+            return Response({'message': 'Invalid ID'})
 
         DATA = {}
         DATA['currency'] = 'INR'
-        DATA['amount'] = int(bill.bill_amount)*100
-        DATA['notes'] = {'type': 'bill', 'buyer': request.user.email, 'id': bill_id}
+        DATA['amount'] = int(bill.bill_amount * 100)
+        DATA['notes'] = {'type': 'bill', 'paid_by': request.user.email, 'bill_id': bill.id,
+                         'bill_month': bill.get_month(), 'bill_year': bill.get_year()}
 
         order = client.order.create(data=DATA)
+        # print(order)
         orders[request.user.email] = order
 
         return Response({'order_id': order['id']})
@@ -92,7 +95,7 @@ def verifyPayment(request):
         payment = Payment(buyer=request.user, invoice=invoice, amount=order['amount'] / 100)
         payment.save()
 
-        bill = Bill.objects.get(id = order['notes']['id'])
+        bill = Bill.objects.get(id=order['notes']['bill_id'])
         bill.is_paid = True
         bill.save()
         
