@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, status
 import environ
 import json
 import razorpay
@@ -89,3 +89,20 @@ def verifyPayment(request):
         coupon.save()
 
     return Response({'success': result})
+
+
+@api_view(['GET'])
+def spendCoupon(request, uuid):
+    
+    try:
+        coupon = Coupon.objects.get(uuid=uuid)
+    except:
+        return Response({'message':'Invalid UUID!'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if(coupon.is_spent):
+        return Response({'success': 0, 'message':'Coupon has been already spent!'})
+    
+    coupon.is_spent = True
+    coupon.save()
+
+    return Response({'success' : 1})
