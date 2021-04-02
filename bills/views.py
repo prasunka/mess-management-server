@@ -15,6 +15,9 @@ class BillsList(generics.ListAPIView):
     serializer_class = BillSerializer
 
     def get_queryset(self):
+        if self.request.user.typeAccount == 'CATERER':
+           return Bill.objects.all()
+            
         return Bill.objects.filter(buyer=self.request.user.id)
 
 

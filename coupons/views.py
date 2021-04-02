@@ -17,6 +17,9 @@ class CouponList(generics.ListAPIView):
     serializer_class = CouponSerializer
 
     def get_queryset(self):
+        if self.request.user.typeAccount == 'CATERER':
+           return Coupon.objects.all()
+
         return Coupon.objects.filter(buyer=self.request.user.id)
 
 
@@ -93,7 +96,10 @@ def verifyPayment(request):
 
 @api_view(['GET'])
 def spendCoupon(request, uuid):
-    
+
+    if request.user.typeAccount != 'CATERER':
+        return Response({'success' : 0, 'message': 'Not authorised to spend coupons!'})
+
     try:
         coupon = Coupon.objects.get(uuid=uuid)
     except:

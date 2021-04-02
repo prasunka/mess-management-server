@@ -16,10 +16,16 @@ class ComplaintList(generics.ListCreateAPIView):
             return ComplaintCreateSerializer
 
     def get_queryset(self):
+        if self.request.user.typeAccount == 'CATERER':
+           return Complaint.objects.all()
+
         return Complaint.objects.filter(user=self.request.user.id)
 
 class ComplaintUpdate(generics.UpdateAPIView):
     serializer_class = ComplaintUpdateSerializer
 
     def get_queryset(self):
-        return Complaint.objects.filter(user=self.request.user.id)
+        if self.request.user.typeAccount == 'CATERER':
+           return Complaint.objects.all()
+        
+        return None

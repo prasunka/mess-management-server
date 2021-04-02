@@ -27,9 +27,14 @@ class UserManager(BaseUserManager):
         return self.get(email=email_)
 
 class User(AbstractBaseUser, PermissionsMixin):
+    TYPE_CHOICES = [
+        ('STUDENT', 'STUDENT'),
+        ('CATERER', 'CATERER'),
+        ('GUEST', 'GUEST')
+    ]
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=100)
-    typeAccount = models.CharField(max_length=20)
+    typeAccount = models.CharField(choices=TYPE_CHOICES, max_length=20)
     specialRole = models.CharField(max_length=100, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)

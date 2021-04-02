@@ -16,10 +16,16 @@ class LeaveList(generics.ListCreateAPIView):
             return LeaveCreateSerializer
 
     def get_queryset(self):
+        if self.request.user.typeAccount == 'CATERER':
+           return Leave.objects.all()
+
         return Leave.objects.filter(user=self.request.user.id)
 
 class LeaveUpdate(generics.UpdateAPIView):
     serializer_class = LeaveUpdateSerializer
 
     def get_queryset(self):
-        return Leave.objects.filter(user=self.request.user.id)
+        if self.request.user.typeAccount == 'CATERER':
+           return Leave.objects.all()
+
+        return None
