@@ -4,6 +4,7 @@ from .models import Complaint
 
 # Register your models here.
 class ComplaintAdmin(admin.ModelAdmin):
+    readonly_fields = ('applied_date',)
     class Meta:
         model = Complaint
 
