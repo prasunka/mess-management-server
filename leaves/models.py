@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 class Leave(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     applied_date = models.DateField(auto_now_add=True)
-    approved_date = models.DateField(auto_now=True)
+    approved_date = models.DateField(null=True, blank=True)
     is_approved = models.BooleanField(default=False)
     commencement_date = models.DateField()
     duration = models.IntegerField(blank=True)
@@ -21,3 +21,10 @@ class Leave(models.Model):
         if not self.duration:
             return self.commencement_date
         return self.commencement_date + timedelta(days=self.duration-1)
+
+    def save(self, *args, **kwargs):
+        if self.is_approved and self.approved_date is None:
+            self.approved_date = datetime.now().date()
+        elif not self.is_approved and self.approved_date is not None:
+            self.approved_date = None
+        super(Leave, self).save(*args, **kwargs)
