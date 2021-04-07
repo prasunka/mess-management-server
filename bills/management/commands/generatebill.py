@@ -25,6 +25,7 @@ class Command(BaseCommand):
         
         if not generated:
             self.stdout.write(self.style.WARNING("No previous generation history found."))
+            self.stdout.write("Generating bill for %d" % prev_month.month)
         
         else:
             last_gen = generated[0]
@@ -32,7 +33,7 @@ class Command(BaseCommand):
                 self.stdout.write("The bill for %s has already been generated." % prev_month.strftime("%B"))
                 return
             else:
-                self.stdout.write(self.style.WARNING("Generating bill for %s" % prev_month.strftime("%B")))
+                self.stdout.write("Generating bill for %d" % prev_month.month)
 
         for user in get_user_model().objects.filter(typeAccount='STUDENT'):
             modes = ModeHistory.objects.filter(user=user.id).order_by("-dateChanged")

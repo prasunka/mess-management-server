@@ -148,4 +148,9 @@ def generateBill(request):
         if 'has already been generated.' in res:
             return Response( {'success':0, 'message': res}, status=status.HTTP_406_NOT_ACCEPTABLE)
         else:
-            return Response({'success':1})
+            lines = res.split('\n')
+            months = []
+            for line in lines:
+                if line.startswith('Generating bill for '):
+                    months.append(int(line.split("Generating bill for ")[1]))
+            return Response({'success':1, 'months':months})
