@@ -1,5 +1,6 @@
 from django.contrib.auth.models import PermissionsMixin, BaseUserManager, AbstractBaseUser
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -32,10 +33,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('CATERER', 'CATERER'),
         ('GUEST', 'GUEST')
     ]
+    MODE_CHOICES = [
+        ('MONTHLY', 'MONTHLY'),
+        ('COUPON', 'COUPON'),
+    ]
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=100)
     typeAccount = models.CharField(choices=TYPE_CHOICES, max_length=20)
     specialRole = models.CharField(max_length=100, null=True, blank=True)
+    billingMode = models.CharField(max_length=100, default='MONTHLY', choices=MODE_CHOICES, blank=True)
+    requestedBillingMode = models.CharField(max_length=100, choices=MODE_CHOICES, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
 
@@ -52,3 +59,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self):
         return self.email
+
+class ModeHistory(models.Model):
+    MODE_CHOICES = [
+        ('MONTHLY', 'MONTHLY'),
+        ('COUPON', 'COUPON'),
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    dateChanged = models.DateField(default=timezone.now)
+    mode = models.CharField(max_length=100, choices=MODE_CHOICES)
+
+    def __str__(self):
+        return self.user.email + ' - ' + str(self.dateChanged.month)\
+            + '/' + str(self.dateChanged.year) + ' - ' + str(self.mode)

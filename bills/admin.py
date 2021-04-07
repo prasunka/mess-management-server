@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Bill
+from .models import Bill, BillGenerationHistory
 # Register your models here.
 
 
@@ -9,3 +9,4 @@ class BillAdmin(admin.ModelAdmin):
         model = Bill
 
 admin.site.register(Bill, BillAdmin)
+admin.site.register(BillGenerationHistory)

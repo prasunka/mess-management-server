@@ -8,8 +8,8 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'name', 'email', 'typeAccount', 'specialRole')
-        read_only_fields = ('id','email')
+        fields = ('id', 'name', 'email', 'typeAccount', 'specialRole', 'billingMode')
+        read_only_fields = ('id', 'email', 'billingMode')
 
 class CustomRegisterSerializer(RegisterSerializer):
     """
@@ -20,6 +20,7 @@ class CustomRegisterSerializer(RegisterSerializer):
     name = serializers.CharField(max_length=100)
     typeAccount = serializers.CharField(max_length=20)
     specialRole = serializers.CharField(required=False, max_length=100, allow_null=True)
+    requestedBillingMode = serializers.CharField(max_length=100, allow_null=True, required=False)
 
     @transaction.atomic
     def save(self, request):
@@ -27,6 +28,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.name = self.data.get('name')
         user.typeAccount = self.data.get('typeAccount')
         user.specialRole = self.data.get('specialRole')
+        user.requestedBillingMode = self.data.get('requestedBillingMode')
         user.is_active = True
         user.save()
         return user
@@ -34,7 +36,12 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 class CustomLoginSerializer(LoginSerializer):
     """
-    Use default serializer except don't user username
+    Use default serializer except don't use username
     """
 
     username = None
+
+class ModeUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('requestedBillingMode',)

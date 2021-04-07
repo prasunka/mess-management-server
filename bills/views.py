@@ -1,7 +1,13 @@
 import environ
+import csv
 import json
 import razorpay
-from rest_framework import generics
+
+from django.http import HttpResponse
+from django.contrib.auth import get_user_model
+from django.db.models import Sum
+
+from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -104,3 +110,27 @@ def verifyPayment(request):
         
 
     return Response({'success': result})
+
+@api_view(['GET'])
+def downloadReport(request):
+
+    if request.user.typeAccount != 'CATERER':
+           return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="report.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Email', 'Name', 'Due Bill'])
+    for user in get_user_model().objects.all():
+        bills = Bill.objects.filter(buyer=user.id)\
+            .filter(is_paid=False)\
+            .aggregate(Sum('bill_amount'))
+        
+        if bills['bill_amount__sum'] is None:
+            continue
+
+        #print(bills['bill_amount__sum'])
+        writer.writerow([user.email, user.name, bills['bill_amount__sum']])
+    
+    return response
