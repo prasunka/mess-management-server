@@ -72,3 +72,6 @@ class ModeHistory(models.Model):
     def __str__(self):
         return self.user.email + ' - ' + str(self.dateChanged.month)\
             + '/' + str(self.dateChanged.year) + ' - ' + str(self.mode)
+
+    class Meta:
+        verbose_name_plural = "Mode histories"

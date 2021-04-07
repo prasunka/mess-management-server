@@ -29,3 +29,6 @@ class BillGenerationHistory(models.Model):
 
     def __str__(self):
         return str(self.id) + ' - ' + str(self.date.month) + '/' + str(self.date.year)
+
+    class Meta:
+        verbose_name_plural = "Bill generation histories"

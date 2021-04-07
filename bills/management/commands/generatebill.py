@@ -29,7 +29,7 @@ class Command(BaseCommand):
         else:
             last_gen = generated[0]
             if last_gen.date.month == prev_month.month:
-                self.stdout.write(self.style.WARNING("The bill for %s has already been generated." % prev_month.strftime("%B")))
+                self.stdout.write("The bill for %s has already been generated." % prev_month.strftime("%B"))
                 return
             else:
                 self.stdout.write(self.style.WARNING("Generating bill for %s" % prev_month.strftime("%B")))

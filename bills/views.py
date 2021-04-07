@@ -1,4 +1,5 @@
 import environ
+import io
 import csv
 import json
 import razorpay
@@ -6,6 +7,7 @@ import razorpay
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
+from django.core.management import call_command
 
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
@@ -134,3 +136,16 @@ def downloadReport(request):
         writer.writerow([user.email, user.name, bills['bill_amount__sum']])
     
     return response
+
+@api_view(['POST'])
+def generateBill(request):
+    if request.user.typeAccount != 'CATERER':
+           return Response(status=status.HTTP_404_NOT_FOUND)
+
+    with io.StringIO() as out:
+        call_command('generatebill', stdout=out)
+        res = out.getvalue()
+        if 'has already been generated.' in res:
+            return Response( {'success':0, 'message': res}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        else:
+            return Response({'success':1})
