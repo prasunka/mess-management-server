@@ -23,7 +23,7 @@ class LeaveCreateSerializer(serializers.ModelSerializer):
             end_date = datetime.strptime(self.context['request'].data.get('end_date'), "%Y-%m-%d").date()
         except:
             serializers.ValidationError("Invalid end_date")
-        print(end_date)
+        #print(end_date)
         validated_data.pop('get_end_date')
         leave = Leave(**validated_data)
         leave.user = self.context['request'].user
