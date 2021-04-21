@@ -25,9 +25,14 @@ Currently Implemented Features
 
 2. Bill
     * Users can get their bill details
-    * Caterer can generate bills
+    * Generate bills(caterer Side)
     * Razorpay integration for bill payments
     * Get the bill report
+
+3. Complaint
+    * Lodge a complaint
+    * List all the complaints(caterer side)
+    * Resolve complaints(caterer side)
 
 How To Use
 =
