@@ -76,15 +76,15 @@ $ python3 manage.py migrate
 ```
 ## Create Admin User
 ```
-$ python manage.py createsuperuser
+$ python3 manage.py createsuperuser
 ```
 ## Run Tests
 ```
-$ python manage.py test
+$ python3 manage.py test
 ```
 ## Run Server
 ```
-$ python manage.py runserver
+$ python3 manage.py runserver
 ```
 > Enter your browser http://localhost:8000/. You can login via admin in http://localhost:8000/admin/.
 
