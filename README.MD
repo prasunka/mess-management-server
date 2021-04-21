@@ -92,6 +92,3 @@ Documentation
 =
 Visit http://localhost:8000/swagger/ for swagger endpoint or http://localhost:8000/redoc/ for redoc endpoint.
 
-TODOS
-=
-- ...
