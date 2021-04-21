@@ -23,6 +23,12 @@ Currently Implemented Features
     * Users can update their payment modes to either pay-per-month service or buying coupons.
 
 
+2. Bill
+    * Users can get their bill details
+    * Caterer can generate bills
+    * Razorpay integration for bill payments
+    * Get the bill report
+
 How To Use
 =
 ## Clone project & Install Requirements
