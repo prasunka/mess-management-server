@@ -19,8 +19,6 @@ http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/redoc/
 The current deployment is for development purposes. Debug is set to to True.
 Please don't destroy my AWS.
 
-<br>
-
 Currently Implemented Features 
 =
 1. Authentication
@@ -49,7 +47,6 @@ Currently Implemented Features
     * Request for leave
     * Leave approval(caterer side)
 
-<br>
 How To Use
 =
 ## Clone project & Install Requirements
