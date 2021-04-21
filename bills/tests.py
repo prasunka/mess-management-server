@@ -81,3 +81,9 @@ class BillModelTest(TestCase):
         self.assertEqual(history.__str__(), str(history.id) + ' - ' + str(history.date.month) + '/' + str(history.date.year))
     
         
+    def test_create_bill(self):
+        User = get_user_model()
+        user = User.objects.get(id = 1)
+        bill = Bill.objects.create(buyer = user, bill_from = datetime.now().date() , bill_days = 20, bill_amount = 2000.0)
+        self.assertEqual(bill.bill_days, 20)
+        self.assertEqual(bill.bill_amount, 2000)
