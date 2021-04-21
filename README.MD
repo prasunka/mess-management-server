@@ -17,9 +17,11 @@ Please don't destroy my AWS.
 
 Currently Implemented Features 
 =
-- User Registration
-- User Login & Logout
-- User password change
+1. Authentication
+    * Users can register/login/logout from the app
+    * Users can change the password
+    * Users can update their payment modes to either pay-per-month service or buying coupons.
+
 
 How To Use
 =
