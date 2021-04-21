@@ -34,6 +34,15 @@ Currently Implemented Features
     * List all the complaints(caterer side)
     * Resolve complaints(caterer side)
 
+4. Coupon
+    * See the list of coupons
+    * Every coupon has it's own unique UUID
+    * Buy coupons with Razorpay Integration
+
+5. Leave
+    * Request for leave
+    * Leave approval(caterer side)
+
 How To Use
 =
 ## Clone project & Install Requirements
