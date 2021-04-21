@@ -87,3 +87,16 @@ class BillModelTest(TestCase):
         bill = Bill.objects.create(buyer = user, bill_from = datetime.now().date() , bill_days = 20, bill_amount = 2000.0)
         self.assertEqual(bill.bill_days, 20)
         self.assertEqual(bill.bill_amount, 2000)
+
+    
+    def test_get_month(self):
+        User = get_user_model()
+        user = User.objects.get(id = 1)
+        bill = Bill.objects.create(buyer = user, bill_from = datetime.now().date() , bill_days = 20, bill_amount = 2000.0)
+        self.assertEqual(bill.get_month(), datetime.now().month)
+
+    def test_get_year(self):
+        User = get_user_model()
+        user = User.objects.get(id = 1)
+        bill = Bill.objects.create(buyer = user, bill_from = datetime.now().date() , bill_days = 20, bill_amount = 2000.0)
+        self.assertEqual(bill.get_year(), datetime.now().year)
