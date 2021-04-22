@@ -1,30 +1,25 @@
 # Mess management Server
 
-An API server for the Mess Management System built with Django web framework. 
+An API server for a Hostel Mess Management System built with Django web framework. 
 
-The API endpoints can currently be accessed [here](http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/v1/).
-
-<br>
+For the React-Native client code, head over to this [repository](https://github.com/Prateek93a/NoMess).
 
 **The available endpoints and API documentation can be accessed**:
-[here](http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/swagger/) and [here](http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/redoc/).
+[here](https://mess-management-server.herokuapp.com/api/swagger/) and [here](https://mess-management-server.herokuapp.com/api/redoc/).
 
 
-For frontend code, head over to this [repo](https://github.com/Prateek93a/NoMess).
-
-Currently Implemented Features 
+Implemented Features 
 =
 1. Authentication
     * Users can register/login/logout from the app
     * Users can change the password
     * Users can update their payment modes to either pay-per-month service or buying coupons.
 
-
 2. Bill
     * Users can get their bill details
     * Generate bills(caterer Side)
     * Razorpay integration for bill payments
-    * Get the bill report
+    * Get a bill report
 
 3. Complaint
     * Lodge a complaint
@@ -34,6 +29,7 @@ Currently Implemented Features
 4. Coupon
     * See the list of coupons
     * Every coupon has it's own unique UUID
+    * Spend coupon by verifying scanning the generated QR Code(caterer side)
     * Buy coupons with Razorpay Integration
 
 5. Leave
