@@ -2,22 +2,18 @@
 
 An API server for the Mess Management System built with Django web framework. 
 
-The API endpoints can currently be accessed at:
-
-http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/v1/
+The API endpoints can currently be accessed [here](http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/v1/).
 
 <br>
 
-**The available endpoints and API documentation can be accessed at**:
+**The available endpoints and API documentation can be accessed**:
+[here](http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/swagger/) and [here](http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/redoc/).
 
-http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/swagger/
-
-or 
-
-http://ec2-3-23-96-26.us-east-2.compute.amazonaws.com:8000/api/redoc/
-
-The current deployment is for development purposes. Debug is set to to True.
+The current deployment is for development purposes. Debug is set to True.
 Please don't destroy my AWS.
+
+
+For frontend code, head over to this [repo](https://github.com/Prateek93a/NoMess).
 
 Currently Implemented Features 
 =
